@@ -32,6 +32,7 @@ if (options.help) {
     console.log('-l,--layout specify path to template file in .ejs format')
     console.log('--logo      specify path to custom logo file');
     console.log('--logo-url  url to link to from logo image');
+    console.log('--no-logo   to specify exclusion of logo in output');
     console.log('--css       specify path to additional css file')
     console.log('--minify    minify output html');
     console.log('-o,--output specify output html file');

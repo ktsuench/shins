@@ -369,7 +369,7 @@ function render(inputStr, options, callback) {
             }
             return '<img src="'+imageSource+'" class="' + className + '" alt="' + altText + '">';
         };
-        locals.logo_image_tag = function () {
+        locals.logo_image_tag = globalOptions['no-logo'] ? function () { return '' } : function () {
             if (!globalOptions.logo) return locals.image_tag('logo.png', 'Logo', 'logo');
             var imageSource = path.resolve(process.cwd(), globalOptions.logo);
             var imgContent = safeReadFileSync(imageSource);
