@@ -45,6 +45,40 @@ function safeReadFileSync(filename,encoding) {
     return '';
 }
 
+function handleMarkedItAttrs(inputStr) {
+    let attrsList = inputStr.match(/{\ *:.+:\ *.+}/g) || [];
+
+    if (attrsList.length > 0) {
+        attrsList.forEach(function (attr) {
+            inputStr = inputStr.replace(attr, '');
+        });
+
+        attrsList = attrsList.map(function (attr) {
+            return attr.replace(/^{/, '').replace(/}$/, '').split(':').slice(1,3);
+        })
+
+        if (attrsList.length > 1) {
+            attrsList = attrsList.reduce(function (obj, attrPair) {
+                return Object.assign({}, Array.isArray(obj) ? {[obj[0]]: obj[1]} : obj, {[attrPair[0]]: attrPair[1]});
+            });
+        } else if (attrsList.length > 0) {
+            attrsList = {
+                [attr[0][0]]: attr[0][1]
+            }
+        } else {
+            attrsList = {};
+        }
+
+        Object.keys(attrsList).forEach(function (key) {
+            let term = new RegExp('{\ *:\ *' + key + '\ *}');
+
+            inputStr = inputStr.replace(term, '{' + attrsList[key] + '}');
+        });
+    }
+
+    return inputStr;
+}
+
 function javascript_include_tag(include) {
     var includeStr = safeReadFileSync(path.join(globalOptions.root, '/source/javascripts/' + include + '.inc'), 'utf8');
     if (globalOptions.minify) {
@@ -257,6 +291,7 @@ function getMimeType(imageSource) {
 function render(inputStr, options, callback) {
 
     if (options.attr) md.use(attrs);
+    if (options['attr-markedit']) inputStr = handleMarkedItAttrs(inputStr);
     if (options['no-links']) md.disable('linkify');
 
     if (typeof callback === 'undefined') { // for pre-v1.4.0 compatibility

@@ -24,21 +24,22 @@ if (options.r) options.root   = options.r;
 if (options.help) {
     console.log('Usage: node shins [options] [input-markdown-filename]');
     console.log();
-    console.log('-h,--help   show help and exit');
-    console.log('-a,--attr   allow css attributes in markdown');
-    console.log('--customcss include custom override css files');
-    console.log('--fonturl   url to fonts when --inline is set, defaults to github repo');
-    console.log('--inline    inline css and javascript resources');
-    console.log('-l,--layout specify path to template file in .ejs format')
-    console.log('--logo      specify path to custom logo file');
-    console.log('--logo-url  url to link to from logo image');
-    console.log('--no-logo   to specify exclusion of logo in output');
-    console.log('--css       specify path to additional css file')
-    console.log('--minify    minify output html');
-    console.log('-o,--output specify output html file');
-    console.log('-r,--root   specify root directory containing source and pub directories');
-    console.log('--unsafe    do not sanitise input markdown');
-    console.log('--no-links  do not automatically convert links in text to anchor tags');
+    console.log('-h,--help         show help and exit');
+    console.log('-a,--attr         allow css attributes in markdown');
+    console.log('--attr-markedit   allow use of template attrs from markedit');
+    console.log('--customcss       include custom override css files');
+    console.log('--fonturl         url to fonts when --inline is set, defaults to github repo');
+    console.log('--inline          inline css and javascript resources');
+    console.log('-l,--layout       specify path to template file in .ejs format')
+    console.log('--logo            specify path to custom logo file');
+    console.log('--logo-url        url to link to from logo image');
+    console.log('--no-logo         to specify exclusion of logo in output');
+    console.log('--css             specify path to additional css file')
+    console.log('--minify          minify output html');
+    console.log('-o,--output       specify output html file');
+    console.log('-r,--root         specify root directory containing source and pub directories');
+    console.log('--unsafe          do not sanitise input markdown');
+    console.log('--no-links        do not automatically convert links in text to anchor tags');
     process.exit(0);
 }
 
